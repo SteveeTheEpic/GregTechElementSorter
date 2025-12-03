@@ -3,6 +3,7 @@ package de.stevee.gtmes.common.data.machines;
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,7 @@ public class ESMultiMachines {
                     .where('I', Predicates.blocks(CASING_EXTREME_ENGINE_INTAKE.get()))
                     .where('V', Predicates.blocks(CAULDRON))
                     .where('P', Predicates.blocks(CASING_TUNGSTENSTEEL_PIPE.get()))
-                    .where('O', Predicates.blocks(CASING_TUNGSTENSTEEL_ROBUST).or())
+                    .where('O', Predicates.blocks(CASING_TUNGSTENSTEEL_ROBUST.get()).or(Predicates.abilities(PartAbility.EXPORT_ITEMS)))
                     .build()))
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_robust_tungstensteel"), GTCEu.id("block/multiblock/evaporation_plant"))
             .register();
