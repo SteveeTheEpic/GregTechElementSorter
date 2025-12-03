@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package de.stevee.gtmes;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
@@ -6,9 +6,11 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.event.PostMaterialEvent;
 import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
-import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate;
 import com.gregtechceu.gtceu.api.sound.SoundEntry;
 
+import de.stevee.gtmes.api.registry.registrate.ESRegistrate;
+import de.stevee.gtmes.common.data.ESRecipeTypes;
+import de.stevee.gtmes.common.data.machines.ESMultiMachines;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -22,15 +24,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(ExampleMod.MOD_ID)
+@Mod(ElementSorter.MOD_ID)
 @SuppressWarnings("removal")
-public class ExampleMod {
+public class ElementSorter {
 
-    public static final String MOD_ID = "examplemod";
+    public static final String MOD_ID = "elementsorter";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static GTRegistrate EXAMPLE_REGISTRATE = GTRegistrate.create(ExampleMod.MOD_ID);
 
-    public ExampleMod() {
+    public ElementSorter() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
@@ -49,7 +50,7 @@ public class ExampleMod {
         // we need to register our object like this!
         MinecraftForge.EVENT_BUS.register(this);
 
-        EXAMPLE_REGISTRATE.registerRegistrate();
+        ESRegistrate.REGISTRATE.registerRegistrate();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
@@ -81,7 +82,7 @@ public class ExampleMod {
      * @param event
      */
     private void addMaterialRegistries(MaterialRegistryEvent event) {
-        GTCEuAPI.materialManager.createRegistry(ExampleMod.MOD_ID);
+        GTCEuAPI.materialManager.createRegistry(ElementSorter.MOD_ID);
     }
 
     /**
@@ -110,7 +111,7 @@ public class ExampleMod {
      * @param event
      */
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
-        // CustomRecipeTypes.init();
+        ESRecipeTypes.init();
     }
 
     /**
@@ -120,7 +121,7 @@ public class ExampleMod {
      * @param event
      */
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
-        // CustomMachines.init();
+        ESMultiMachines.init();
     }
 
     /**
